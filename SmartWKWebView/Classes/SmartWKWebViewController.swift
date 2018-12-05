@@ -89,9 +89,13 @@ public class SmartWKWebViewController: PannableViewController, WKNavigationDeleg
         if let URL = url {
             let urlRequest = URLRequest.init(url: URL)
             webView.load(urlRequest)
-            toolbar.addressLabel.text = URL.scheme + "://" + URL.host
-            toolbar.titleLabel.text = stringLoading
-
+            if let host = URL.host {
+                toolbar.addressLabel.text = host
+                toolbar.titleLabel.text = stringLoading
+            } else {
+                toolbar.addressLabel.text = url?.absoluteString
+                toolbar.titleLabel.text = stringLoading
+            }
         }
     }
     
