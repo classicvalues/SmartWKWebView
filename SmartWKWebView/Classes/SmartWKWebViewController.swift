@@ -15,7 +15,7 @@ public class SmartWKWebViewController: PannableViewController, WKNavigationDeleg
     // MARK: - Public Variables
     
     public var barHeight: CGFloat = 44
-    public var topMargin: CGFloat = 20
+    public var topMargin: CGFloat = 42
     public var stringLoading = "Loading"
     public var url: URL!
     public var webView: WKWebView!
@@ -85,13 +85,13 @@ public class SmartWKWebViewController: PannableViewController, WKNavigationDeleg
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        toolbar.addressLabel.text = url?.absoluteString ?? ""
-        toolbar.titleLabel.text = stringLoading
-        
+
         if let URL = url {
             let urlRequest = URLRequest.init(url: URL)
             webView.load(urlRequest)
+            toolbar.addressLabel.text = URL.scheme + "://" + URL.host
+            toolbar.titleLabel.text = stringLoading
+
         }
     }
     
